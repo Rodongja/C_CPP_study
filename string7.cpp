@@ -1,58 +1,58 @@
-//¹®Á¦ 5
-//µµ¼­ °ü¸® ÇÁ·Î±×·¥À» ¸¸µé¾îº¾½Ã´Ù.ÇÁ·Î±×·¥¿¡´Â ´ÙÀ½°ú °°Àº ±â´ÉµéÀÌ ±¸ÇöµÇ¾î ÀÖ¾î¾ß ÇÕ´Ï´Ù. (³­ÀÌµµ : ß¾)
+//ë¬¸ì œ 5
+//ë„ì„œ ê´€ë¦¬ í”„ë¡œê·¸ë¨ì„ ë§Œë“¤ì–´ë´…ì‹œë‹¤.í”„ë¡œê·¸ë¨ì—ëŠ” ë‹¤ìŒê³¼ ê°™ì€ ê¸°ëŠ¥ë“¤ì´ êµ¬í˜„ë˜ì–´ ìˆì–´ì•¼ í•©ë‹ˆë‹¤. (ë‚œì´ë„ : ä¸Š)
 
-//Ã¥À» »õ·Î Ãß°¡ÇÏ´Â ±â´É(Ã¥ÀÇ ÃÑ °³¼ö´Â 100 ±ÇÀÌ¶ó ÇÏÀÚ.ÀÌ ¶§, °¢ Ã¥ÀÇ Á¤º¸´Â Á¦¸ñ, ÀúÀÚÀÇ ÀÌ¸§, ÃâÆÇ»ç·Î ÇÑ´Ù)
+//ì±…ì„ ìƒˆë¡œ ì¶”ê°€í•˜ëŠ” ê¸°ëŠ¥(ì±…ì˜ ì´ ê°œìˆ˜ëŠ” 100 ê¶Œì´ë¼ í•˜ì.ì´ ë•Œ, ê° ì±…ì˜ ì •ë³´ëŠ” ì œëª©, ì €ìì˜ ì´ë¦„, ì¶œíŒì‚¬ë¡œ í•œë‹¤)
 
-//Ã¥ÀÇ Á¦¸ñÀ» °Ë»öÇÏ¸é ±× Ã¥ÀÇ Á¤º¸°¡ ³ª¿Í¾ß ÇÑ´Ù.
+//ì±…ì˜ ì œëª©ì„ ê²€ìƒ‰í•˜ë©´ ê·¸ ì±…ì˜ ì •ë³´ê°€ ë‚˜ì™€ì•¼ í•œë‹¤.
 
-//À§¿Í ¸¶Âù°¡Áö·Î ÀúÀÚ, ÃâÆÇ»ç °Ë»ö ±â´ÉÀÌ ÀÖ¾î¾ß ÇÑ´Ù.
+//ìœ„ì™€ ë§ˆì°¬ê°€ì§€ë¡œ ì €ì, ì¶œíŒì‚¬ ê²€ìƒ‰ ê¸°ëŠ¥ì´ ìˆì–´ì•¼ í•œë‹¤.
 
-//Ã¥À» ºô¸®´Â ±â´É.
+//ì±…ì„ ë¹Œë¦¬ëŠ” ê¸°ëŠ¥.
 
-//Ã¥À» ¹İ³³ÇÏ´Â ±â´É
+//ì±…ì„ ë°˜ë‚©í•˜ëŠ” ê¸°ëŠ¥
 
 #include <iostream>
 
-void library(int *idx, int *book_number, char(*name)[20], char (*author)[20], char (*publisher)[20], bool* isBorrow);
-void add_book(int *book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], bool* isBorrow);
-void add(int *book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], bool* isBorrow);
-void borrow_book(int *book_number, bool* isBorrow);
-void return_book(int *book_number, bool* isBorrow);
-void search_book(int *book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], bool* isBorrow);
+void library(int *idx, int *book_number, char(*name)[20], char (*author)[20], char (*publisher)[20], int* isBorrow);
+void add_book(int *book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], int* isBorrow);
+void add(int *book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], int* isBorrow);
+void borrow_book(int *book_number, int* isBorrow);
+void return_book(int *book_number, int* isBorrow);
+void search_book(int *book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], int* isBorrow);
 
 
 int main() {
-	int idx = 1;
+	int idx = -1;
 	int book_number = 0;
-	bool isBorrow[100] = {false};
+	int isBorrow[100] = {-1}; //ì´ˆê¸°ê°’ -1, ë¯¸ëŒ€ì—¬ 0, ëŒ€ì—¬ 1
 	char name[100][20] = {};
 	char author[100][20] = {};
 	char publisher[100][20] = {};
 
-	while (idx != 0)
+	while (0 != idx)
 	{
-		std::cout << "¿øÇÏ´Â ±â´ÉÀ» ¼±ÅÃÇÏ¼¼¿ä" << std::endl;
-		std::cout << "1 : »õ·Î¿î Ã¥ Ãß°¡ÇÏ±â" << std::endl;
-		std::cout << "2 : Ã¥ ºô¸®±â" << std::endl;
-		std::cout << "3 : Ã¥ ¹İ³³ÇÏ±â" << std::endl;
-		std::cout << "4 : Ã¥ °Ë»öÇÏ±â" << std::endl;
-		std::cout << "0 : Á¾·á" << std::endl;
+		std::cout << "ì›í•˜ëŠ” ê¸°ëŠ¥ì„ ì„ íƒí•˜ì„¸ìš”" << std::endl;
+		std::cout << "1 : ìƒˆë¡œìš´ ì±… ì¶”ê°€í•˜ê¸°" << std::endl;
+		std::cout << "2 : ì±… ë¹Œë¦¬ê¸°" << std::endl;
+		std::cout << "3 : ì±… ë°˜ë‚©í•˜ê¸°" << std::endl;
+		std::cout << "4 : ì±… ê²€ìƒ‰í•˜ê¸°" << std::endl;
+		std::cout << "0 : ì¢…ë£Œ" << std::endl;
 		std::cin >> idx;
 		if (0 == idx)
 		{
-			std::cout << "Á¾·áÇÕ´Ï´Ù";
+			std::cout << "ì¢…ë£Œí•©ë‹ˆë‹¤";
 			break;
 		}
 		else if (idx > 4 || idx < 0)
 		{
-			std::cout << "Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¿© Á¾·áÇÕ´Ï´Ù";
+			std::cout << "ì˜ëª»ëœ ê°’ì„ ì…ë ¥í•˜ì—¬ ì¢…ë£Œí•©ë‹ˆë‹¤";
 			break;
 		}
 		library(&idx, &book_number, name, author, publisher, isBorrow);
 	}
 } 
 
-void library(int* idx, int* book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], bool* isBorrow)
+void library(int* idx, int* book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], int* isBorrow)
 {
 	switch (*idx)
 	{
@@ -71,15 +71,15 @@ void library(int* idx, int* book_number, char(*name)[20], char(*author)[20], cha
 	}
 }
 
-void add_book(int* book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], bool* isBorrow)
+void add_book(int* book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], int* isBorrow)
 {
-	std::cout << "Ãß°¡ÇÒ Ã¥ÀÇ ¹øÈ£¸¦ Àû¾îÁÖ¼¼¿ä" << std::endl;
+	std::cout << "ì¶”ê°€í•  ì±…ì˜ ë²ˆí˜¸ë¥¼ ì ì–´ì£¼ì„¸ìš”" << std::endl;
 	std::cin >> *book_number;
 
 	if (name[*book_number][0] != 0)
 	{
-		// °°Àº ¹øÈ£ÀÇ Ã¥ÀÌ ÀÖÀ»¶§
-		std::cout << "ÀÌ¹Ì °°Àº ¹øÈ£ÀÇ Ã¥ÀÌ ÀÖ½À´Ï´Ù. ±âÁ¸ ¹øÈ£¸¦ µ¤¾î ¾²½Ã°Ú½À´Ï±î? 1:YES/0:NO" << std::endl;
+		// ê°™ì€ ë²ˆí˜¸ì˜ ì±…ì´ ìˆì„ë•Œ
+		std::cout << "ì´ë¯¸ ê°™ì€ ë²ˆí˜¸ì˜ ì±…ì´ ìˆìŠµë‹ˆë‹¤. ê¸°ì¡´ ë²ˆí˜¸ë¥¼ ë®ì–´ ì“°ì‹œê² ìŠµë‹ˆê¹Œ? 1:YES/0:NO" << std::endl;
 		int YoN = 0;
 		std::cin >> YoN;
 		if (1 == YoN)
@@ -88,11 +88,11 @@ void add_book(int* book_number, char(*name)[20], char(*author)[20], char(*publis
 		}
 		else if(0 == YoN)
 		{
-			std::cout << "ÀÌÀü ´Ü°è·Î µ¹¾Æ°©´Ï´Ù." << std::endl;
+			std::cout << "ì´ì „ ë‹¨ê³„ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤." << std::endl;
 		}
 		else
 		{
-			std::cout << "Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¿© ÀÌÀü ´Ü°è·Î µ¹¾Æ°©´Ï´Ù." << std::endl;
+			std::cout << "ì˜ëª»ëœ ê°’ì„ ì…ë ¥í•˜ì—¬ ì´ì „ ë‹¨ê³„ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤." << std::endl;
 		}
 	}
 	else
@@ -101,96 +101,173 @@ void add_book(int* book_number, char(*name)[20], char(*author)[20], char(*publis
 	}
 }
 
-void add(int* book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], bool* isBorrow)
+void add(int* book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], int* isBorrow)
 {
 	if (*book_number >= 100) {
-		std::cout << "´õ ÀÌ»ó Ã¥À» Ãß°¡ÇÒ ¼ö ¾ø½À´Ï´Ù" << std::endl;
+		std::cout << "ë” ì´ìƒ ì±…ì„ ì¶”ê°€í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤" << std::endl;
 		return;
 	}
 
-	std::cout << "Ã¥ÀÇ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä" << std::endl;
-	std::cin.ignore(); // ÀÌÀü¿¡ ³²¾ÆÀÖÀ»Áöµµ ¸ğ¸£´Â '\n' ¹®ÀÚ¸¦ Áö¿ì±â À§ÇØ
+	std::cout << "ì±…ì˜ ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”" << std::endl;
+	std::cin.ignore(); // ì´ì „ì— ë‚¨ì•„ìˆì„ì§€ë„ ëª¨ë¥´ëŠ” '\n' ë¬¸ìë¥¼ ì§€ìš°ê¸° ìœ„í•´
 	std::cin.getline(name[*book_number], 20);
 
-	std::cout << "Ã¥ÀÇ ÀúÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä" << std::endl;
+	std::cout << "ì±…ì˜ ì €ìë¥¼ ì…ë ¥í•˜ì„¸ìš”" << std::endl;
 	std::cin.getline(author[*book_number], 20);
 
-	std::cout << "Ã¥ÀÇ ÃâÆÇ»ç¸¦ ÀÔ·ÂÇÏ¼¼¿ä" << std::endl;
+	std::cout << "ì±…ì˜ ì¶œíŒì‚¬ë¥¼ ì…ë ¥í•˜ì„¸ìš”" << std::endl;
 	std::cin.getline(publisher[*book_number], 20);
 
-	isBorrow[*book_number] = false;
+	isBorrow[*book_number] = 0;
 
-	std::cout << "ÀÔ·ÂÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù." << std::endl;
+	std::cout << "ì…ë ¥ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤." << std::endl;
 
 }
 
 
-void borrow_book(int* book_number, bool* isBorrow)
+void borrow_book(int* book_number, int* isBorrow)
 {
-	std::cout << "ºô¸®°í ½ÍÀº Ã¥ÀÇ ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä" << std::endl;
+	std::cout << "ë¹Œë¦¬ê³  ì‹¶ì€ ì±…ì˜ ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”" << std::endl;
 	std::cin >> *book_number;
 
-	if (isBorrow[*book_number] == true)
+	if (isBorrow[*book_number] == 1)
 	{
-		std::cout << "ÀÌ¹Ì ´ë¿©ÁßÀÎ µµ¼­ÀÔ´Ï´Ù" << std::endl;
+		std::cout << "ì´ë¯¸ ëŒ€ì—¬ì¤‘ì¸ ë„ì„œì…ë‹ˆë‹¤" << std::endl;
 	}
-	else if (isBorrow[*book_number] == NULL)
+	else if (isBorrow[*book_number] == -1)
 	{
-		std::cout << "Á¸ÀçÇÏÁö ¾Ê´Â ¹øÈ£ÀÔ´Ï´Ù" << std::endl;
+		std::cout << "ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ë²ˆí˜¸ì…ë‹ˆë‹¤" << std::endl;
 	}
 	else
 	{
-		isBorrow[*book_number = true];
-		std::cout << "Ã¥ÀÌ Á¤»óÀûÀ¸·Î ´ë¿©µÇ¾ú½À´Ï´Ù" << std::endl;
+		isBorrow[*book_number] = 1;
+		std::cout << "ì±…ì´ ì •ìƒì ìœ¼ë¡œ ëŒ€ì—¬ë˜ì—ˆìŠµë‹ˆë‹¤" << std::endl;
 	}
 }
 
-void return_book(int* book_number, bool* isBorrow)
+void return_book(int* book_number, int* isBorrow)
 {
-	std::cout << "¹İ³³ÇÒ Ã¥ÀÇ ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä" << std::endl;
+	std::cout << "ë°˜ë‚©í•  ì±…ì˜ ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”" << std::endl;
 	std::cin >> *book_number;
 
-	if (isBorrow[*book_number] == false)
+	if (isBorrow[*book_number] == 0)
 	{
-		std::cout << "´ë¿©ÁßÀÌÁö ¾ÊÀº µµ¼­ÀÔ´Ï´Ù" << std::endl;
+		std::cout << "ëŒ€ì—¬ì¤‘ì´ì§€ ì•Šì€ ë„ì„œì…ë‹ˆë‹¤" << std::endl;
 	}
-	else if (isBorrow[*book_number == NULL])
+	else if (isBorrow[*book_number] == -1)
 	{
-		std::cout << "Á¸ÀçÇÏÁö ¾Ê´Â ¹øÈ£ÀÔ´Ï´Ù." << std::endl;
+		std::cout << "ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ë²ˆí˜¸ì…ë‹ˆë‹¤." << std::endl;
 	}
 	else
 	{
-		isBorrow[*book_number] = false;
-		std::cout << "Á¤»óÀûÀ¸·Î ¹İ³³µÇ¾ú½À´Ï´Ù" << std::endl;
+		isBorrow[*book_number] = 0;
+		std::cout << "ì •ìƒì ìœ¼ë¡œ ë°˜ë‚©ë˜ì—ˆìŠµë‹ˆë‹¤" << std::endl;
 	}
 }
 
-void search_book(int* book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], bool* isBorrow)
+void search_book(int* book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], int* isBorrow)
 {
-	char name_str[20] = {};
-	std::cout << "Ã£°í½ÍÀº Ã¥ÀÇ Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä" << std::endl;
-	std::cin >> name_str;
-	bool isHere = false;
-	for (int i = 0; i <= 100; ++i)
+	int idx = 0;
+	std::cout << "ì°¾ìœ¼ë ¤ëŠ” ë²”ì£¼ë¥¼ ì„ íƒí•˜ì„¸ìš”" << std::endl;
+	std::cout << "1 : ì±… ì œëª©ìœ¼ë¡œ ì°¾ê¸°" << std::endl;
+	std::cout << "2 : ì‘ê°€ ì´ë¦„ìœ¼ë¡œ ì°¾ê¸°" << std::endl;
+	std::cout << "3 : ì¶œíŒì‚¬ ì´ë¦„ìœ¼ë¡œ ì°¾ê¸°" << std::endl;
+	std::cin >> idx;
+	if (idx == 1)
 	{
-		if (std::strcmp(name_str,name[i]) == 0)
+		char name_str[20] = {};
+		std::cout << "ì°¾ê³ ì‹¶ì€ ì±…ì˜ ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”" << std::endl;
+		std::cin >> name_str;
+		bool isHere = false;
+
+		for (int i = 0; i < 100; ++i)
 		{
-			if (isBorrow[i] == true)
+			if (std::strcmp(name_str, name[i]) == 0)
 			{
-				std::cout << "Ã£À¸½Ã´Â Ã¥Àº " << i << "¹ø¿¡ ÀÖ°í ÇöÀç ´ë¿©ÁßÀÔ´Ï´Ù" << std::endl;
-				isHere = true;
-				break;
-			}
-			else
-			{
-				std::cout << "Ã£À¸½Ã´Â Ã¥Àº " << i << "¹ø¿¡ ÀÖ°í ÇöÀç ´ë¿©ÁßÀÌ ¾Æ´Õ´Ï´Ù" << std::endl;
-				isHere = true;
-				break;
+				if (isBorrow[i])
+				{
+					std::cout << "ì°¾ìœ¼ì‹œëŠ” ì±…ì€ " << i << "ë²ˆì— ìˆê³  í˜„ì¬ ëŒ€ì—¬ì¤‘ì…ë‹ˆë‹¤" << std::endl;
+					isHere = true;
+					break;
+				}
+				else
+				{
+					std::cout << "ì°¾ìœ¼ì‹œëŠ” ì±…ì€ " << i << "ë²ˆì— ìˆê³  í˜„ì¬ ëŒ€ì—¬ì¤‘ì´ ì•„ë‹™ë‹ˆë‹¤" << std::endl;
+					isHere = true;
+					break;
+				}
 			}
 		}
+		if (isHere == false)
+		{
+			std::cout << "ì°¾ìœ¼ì‹œëŠ” ì±…ì´ ì—†ìŠµë‹ˆë‹¤" << std::endl;
+		}
 	}
-	if (isHere == false)
+
+	else if (idx == 2)
 	{
-		std::cout << "Ã£À¸½Ã´Â Ã¥ÀÌ ¾ø½À´Ï´Ù" << std::endl;
+		char author_str[20] = {};
+		std::cout << "ì°¾ê³ ì‹¶ì€ ì±…ì˜ ì‘ê°€ ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”" << std::endl;
+		std::cin >> author_str;
+		bool isHere = false;
+
+		for (int i = 0; i <= 100; ++i)
+		{
+			if (std::strcmp(author_str, author[i]) == 0)
+			{
+				if (isBorrow[i])
+				{
+					std::cout << "ì°¾ìœ¼ì‹œëŠ” ì±…ì€ " << i << "ë²ˆì— ìˆê³  í˜„ì¬ ëŒ€ì—¬ì¤‘ì…ë‹ˆë‹¤" << std::endl;
+					isHere = true;
+					break;
+				}
+				else
+				{
+					std::cout << "ì°¾ìœ¼ì‹œëŠ” ì±…ì€ " << i << "ë²ˆì— ìˆê³  í˜„ì¬ ëŒ€ì—¬ì¤‘ì´ ì•„ë‹™ë‹ˆë‹¤" << std::endl;
+					isHere = true;
+					break;
+				}
+			}
+		}
+		if (isHere == false)
+		{
+			std::cout << "ì°¾ìœ¼ì‹œëŠ” ì±…ì´ ì—†ìŠµë‹ˆë‹¤" << std::endl;
+		}
+	}
+
+	else if(idx == 3)
+	{
+		char publisher_str[20] = {};
+		std::cout << "ì°¾ê³ ì‹¶ì€ ì±…ì˜ ì¶œíŒì‚¬ ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”" << std::endl;
+		std::cin >> publisher_str;
+		bool isHere = false;
+
+		for (int i = 0; i <= 100; ++i)
+		{
+			if (std::strcmp(publisher_str, publisher[i]) == 0)
+			{
+				if (isBorrow[i])
+				{
+					std::cout << "ì°¾ìœ¼ì‹œëŠ” ì±…ì€ " << i << "ë²ˆì— ìˆê³  í˜„ì¬ ëŒ€ì—¬ì¤‘ì…ë‹ˆë‹¤" << std::endl;
+					isHere = true;
+					break;
+				}
+				else
+				{
+					std::cout << "ì°¾ìœ¼ì‹œëŠ” ì±…ì€ " << i << "ë²ˆì— ìˆê³  í˜„ì¬ ëŒ€ì—¬ì¤‘ì´ ì•„ë‹™ë‹ˆë‹¤" << std::endl;
+					isHere = true;
+					break;
+				}
+			}
+		}
+		if (isHere == false)
+		{
+			std::cout << "ì°¾ìœ¼ì‹œëŠ” ì±…ì´ ì—†ìŠµë‹ˆë‹¤" << std::endl;
+		}
+	}
+
+	else
+	{
+		std::cout << "ì˜ëª»ëœ ê°’ì„ ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤" << std::endl;
 	}
 }
