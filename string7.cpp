@@ -12,6 +12,7 @@
 //책을 반납하는 기능
 
 #include <iostream>
+#include <string.h>
 
 void library(int *idx, int *book_number, char(*name)[20], char (*author)[20], char (*publisher)[20], int* isBorrow);
 void add_book(int *book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], int* isBorrow);
@@ -73,7 +74,7 @@ void library(int* idx, int* book_number, char(*name)[20], char(*author)[20], cha
 
 void add_book(int* book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], int* isBorrow)
 {
-	std::cout << "추가할 책의 번호를 적어주세요" << std::endl;
+	std::cout << "추가할 책의 번호를 적어주세요 (0~99)" << std::endl;
 	std::cin >> *book_number;
 
 	if (name[*book_number][0] != 0)
@@ -104,7 +105,7 @@ void add_book(int* book_number, char(*name)[20], char(*author)[20], char(*publis
 void add(int* book_number, char(*name)[20], char(*author)[20], char(*publisher)[20], int* isBorrow)
 {
 	if (*book_number >= 100) {
-		std::cout << "더 이상 책을 추가할 수 없습니다" << std::endl;
+		std::cout << "100 이상의 번호로 책을 추가할 수 없습니다" << std::endl;
 		return;
 	}
 
@@ -182,19 +183,17 @@ void search_book(int* book_number, char(*name)[20], char(*author)[20], char(*pub
 
 		for (int i = 0; i < 100; ++i)
 		{
-			if (std::strcmp(name_str, name[i]) == 0)
+			if (strstr(name[i], name_str) /*std::strcmp(name_str, name[i]) == 0*/)
 			{
 				if (isBorrow[i])
 				{
-					std::cout << "찾으시는 책은 " << i << "번에 있고 현재 대여중입니다" << std::endl;
+					std::cout << "찾으시는 책의 이름은 " << name[i] << "이고 " << i << "번에 있으며 현재 대여중입니다" << std::endl;
 					isHere = true;
-					break;
 				}
 				else
 				{
-					std::cout << "찾으시는 책은 " << i << "번에 있고 현재 대여중이 아닙니다" << std::endl;
+					std::cout << "찾으시는 책의 이름은 " << name[i] << "이고 " << i << "번에 있으며 현재 대여중이 아닙니다" << std::endl;
 					isHere = true;
-					break;
 				}
 			}
 		}
@@ -213,19 +212,17 @@ void search_book(int* book_number, char(*name)[20], char(*author)[20], char(*pub
 
 		for (int i = 0; i <= 100; ++i)
 		{
-			if (std::strcmp(author_str, author[i]) == 0)
+			if (strstr(author[i], author_str) /*std::strcmp(author_str, author[i]) == 0*/)
 			{
 				if (isBorrow[i])
 				{
-					std::cout << "찾으시는 책은 " << i << "번에 있고 현재 대여중입니다" << std::endl;
+					std::cout << "찾으시는 책의 이름은 " << name[i] << "이고 " << i << "번에 있으며 현재 대여중입니다" << std::endl;
 					isHere = true;
-					break;
 				}
 				else
 				{
-					std::cout << "찾으시는 책은 " << i << "번에 있고 현재 대여중이 아닙니다" << std::endl;
+					std::cout << "찾으시는 책의 이름은 " << name[i] << "이고 " << i << "번에 있으며 현재 대여중이 아닙니다" << std::endl;
 					isHere = true;
-					break;
 				}
 			}
 		}
@@ -235,7 +232,7 @@ void search_book(int* book_number, char(*name)[20], char(*author)[20], char(*pub
 		}
 	}
 
-	else if(idx == 3)
+	else if (idx == 3)
 	{
 		char publisher_str[20] = {};
 		std::cout << "찾고싶은 책의 출판사 이름을 입력하세요" << std::endl;
@@ -244,19 +241,17 @@ void search_book(int* book_number, char(*name)[20], char(*author)[20], char(*pub
 
 		for (int i = 0; i <= 100; ++i)
 		{
-			if (std::strcmp(publisher_str, publisher[i]) == 0)
+			if (strstr(publisher[i], publisher_str) /*std::strcmp(publisher_str, publisher[i]) == 0*/)
 			{
 				if (isBorrow[i])
 				{
-					std::cout << "찾으시는 책은 " << i << "번에 있고 현재 대여중입니다" << std::endl;
+					std::cout << "찾으시는 책의 이름은 " << name[i] << "이고 " << i << "번에 있으며 현재 대여중입니다" << std::endl;
 					isHere = true;
-					break;
 				}
 				else
 				{
-					std::cout << "찾으시는 책은 " << i << "번에 있고 현재 대여중이 아닙니다" << std::endl;
+					std::cout << "찾으시는 책의 이름은 " << name[i] << "이고 " << i << "번에 있으며 현재 대여중이 아닙니다" << std::endl;
 					isHere = true;
-					break;
 				}
 			}
 		}
@@ -269,5 +264,6 @@ void search_book(int* book_number, char(*name)[20], char(*author)[20], char(*pub
 	else
 	{
 		std::cout << "잘못된 값을 입력하셨습니다" << std::endl;
+		search_book(book_number, name, author, publisher, isBorrow);
 	}
 }
