@@ -3,8 +3,8 @@
 
 class Date {
 	int year;
-	int month;  // 1 ºÎÅÍ 12 ±îÁö.
-	int day;    // 1 ºÎÅÍ 31 ±îÁö.
+	int month;  // 1 ë¶€í„° 12 ê¹Œì§€.
+	int day;    // 1 ë¶€í„° 31 ê¹Œì§€.
 
 public:
 	void SetDate(int year_, int month_, int day_)
@@ -29,6 +29,8 @@ public:
 	}
 	void day_update()
 	{
+		// 1,3,5,7,8,10,12ì›”ì€ 31ì¼ê¹Œì§€, 2ì›”ì€ 28ì¼ê¹Œì§€, ë‚˜ë¨¸ì§€ëŠ” 30ì¼ê¹Œì§€ ìˆìŒ
+		// ê·¸ ì´ìƒì„ ë„˜ìœ¼ë©´ dayë¥¼ ë¹¼ê³  monthë¥¼ ë”í•´ì•¼í•¨
 		switch (month)
 		{
 		case 1:
@@ -41,7 +43,9 @@ public:
 			if (day > 31)
 			{
 				day -= 31;
+				//month ë”í•˜ê¸° í•¨ìˆ˜
 				AddMonth(1);
+				//ë§Œì•½ dayê°€ ì—¬ì „íˆ 31 ì´ìƒì¼ ê²½ìš°ë¥¼ ìœ„í•´ í•œë²ˆ ë” ì—…ë°ì´íŠ¸
 				day_update();
 			}
 			break;
@@ -81,7 +85,7 @@ public:
 
 	void ShowDate()
 	{
-		std::cout << year << "³â " << month << "¿ù " << day << "ÀÏ ÀÔ´Ï´Ù." << std::endl;
+		std::cout << year << "ë…„ " << month << "ì›” " << day << "ì¼ ì…ë‹ˆë‹¤." << std::endl;
 	}
 };
 
@@ -94,13 +98,13 @@ int main(void)
 	{
 		int idx = 0;
 
-		std::cout << "¿øÇÏ´Â ¸í·ÉÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä" << std::endl;
-		std::cout << "1 : ³¯Â¥ ¼±ÅÃ" << std::endl;
-		std::cout << "2 : day Ãß°¡" << std::endl;
-		std::cout << "3 : month Ãß°¡" << std::endl;
-		std::cout << "4 : year Ãß°¡" << std::endl;
-		std::cout << "5 : ³¯Â¥ º¸±â" << std::endl;
-		std::cout << "6 : ÇÁ·Î±×·¥ Á¾·á" << std::endl;
+		std::cout << "ì›í•˜ëŠ” ëª…ë ¹ì„ ì…ë ¥í•´ì£¼ì„¸ìš”" << std::endl;
+		std::cout << "1 : ë‚ ì§œ ì„ íƒ" << std::endl;
+		std::cout << "2 : day ì¶”ê°€" << std::endl;
+		std::cout << "3 : month ì¶”ê°€" << std::endl;
+		std::cout << "4 : year ì¶”ê°€" << std::endl;
+		std::cout << "5 : ë‚ ì§œ ë³´ê¸°" << std::endl;
+		std::cout << "6 : í”„ë¡œê·¸ë¨ ì¢…ë£Œ" << std::endl;
 
 		std::cin >> idx;
 
@@ -110,13 +114,13 @@ int main(void)
 		{
 			int y, m, d = 0;
 
-			std::cout << "year¸¦ ÀÔ·ÂÇÏ¼¼¿ä" << std::endl;
+			std::cout << "yearë¥¼ ì…ë ¥í•˜ì„¸ìš”" << std::endl;
 			std::cin >> y;
 
-			std::cout << "month¸¦ ÀÔ·ÂÇÏ¼¼¿ä" << std::endl;
+			std::cout << "monthë¥¼ ì…ë ¥í•˜ì„¸ìš”" << std::endl;
 			std::cin >> m;
 
-			std::cout << "day¸¦ ÀÔ·ÂÇÏ¼¼¿ä" << std::endl;
+			std::cout << "dayë¥¼ ì…ë ¥í•˜ì„¸ìš”" << std::endl;
 			std::cin >> d;
 
 
@@ -125,7 +129,7 @@ int main(void)
 		}
 		case 2:
 		{
-			std::cout << "´õÇÏ·Á´Â ¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä" << std::endl;
+			std::cout << "ë”í•˜ë ¤ëŠ” ìˆ˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”" << std::endl;
 			std::cin >> idx;
 
 			date.AddDay(idx);
@@ -133,7 +137,7 @@ int main(void)
 		}
 		case 3:
 		{
-			std::cout << "´õÇÏ·Á´Â ¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä" << std::endl;
+			std::cout << "ë”í•˜ë ¤ëŠ” ìˆ˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”" << std::endl;
 			std::cin >> idx;
 
 			date.AddMonth(idx);
@@ -141,7 +145,7 @@ int main(void)
 		}
 		case 4:
 		{
-			std::cout << "´õÇÏ·Á´Â ¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä" << std::endl;
+			std::cout << "ë”í•˜ë ¤ëŠ” ìˆ˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”" << std::endl;
 			std::cin >> idx;
 
 			date.AddYear(idx);
